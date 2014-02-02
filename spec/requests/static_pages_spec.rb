@@ -1,5 +1,9 @@
 require 'spec_helper'
 
+RSpec.configure do |config|
+  config.include Capybara::DSL
+end
+
 describe "Static pages" do
 
   describe "Home page" do
