@@ -20,3 +20,15 @@ RSpec::Matchers.define :have_error_message do |message|
 		expect(page).to have_selector('div.alert.alert-error', text:message)
 	end
 end
+
+RSpec::Matchers.define :show_signout do 
+	match do |page|
+		expect(page).to have_link('Sign out',		href:signout_path)
+	end
+end
+
+RSpec::Matchers.define :show_signin do 
+	match do |page|
+		expect(page).to have_link('Sign in',		href:signin_path)
+	end
+end

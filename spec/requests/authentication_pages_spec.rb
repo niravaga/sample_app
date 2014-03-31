@@ -5,7 +5,7 @@ describe "Authentication" do
   subject { page }
 
   describe "signin_page" do
-  	before {visit signin_path}
+  	before { visit signin_path }
 
   	it { should have_content('Sign in') }
   	it { should have_title('Sign in') }
@@ -22,7 +22,7 @@ describe "Authentication" do
 
   		describe "after visiting another page" do
   			before { click_link "Home"}
-  			it { should_not have_selector('div.alert.alert-error')}
+  			it { should_not have_error_message('Invalid') }
   		end
   	end
 
@@ -31,13 +31,13 @@ describe "Authentication" do
   		before { valid_signin(user) }
 
   		it { should have_title(user.name) }
-  		it { should have_link('Profile',		href:user_path(user))}
-  		it { should have_link('Sign out',		href:signout_path)}
-  		it { should_not have_link('Sign in',	href:signin_path)}
+  		it { should have_link('Profile',		href:user_path(user)) }
+  		it { should show_signout }
+  		it { should_not show_signin }
 
   		describe "followed by signout" do
   			before { click_link "Sign out" }
-  			it { should have_link ('Sign in') }
+  			it { should show_signin }
   		end
   	end
 
